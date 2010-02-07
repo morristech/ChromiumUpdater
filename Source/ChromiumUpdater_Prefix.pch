@@ -1,0 +1,9 @@
+//
+// Prefix header for all source files of the 'ChromiumUpdater' target in the 'ChromiumUpdater' project
+//
+
+#ifdef __OBJC__
+    #import <Cocoa/Cocoa.h>
+#endif
+
+#define CHROMIUM_URL @"http://build.chromium.org/buildbot/snapshots/chromium-rel-mac/"
