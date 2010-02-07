@@ -52,8 +52,16 @@
 
 - (NSString*) localApp {
   NSString* path = [[NSWorkspace sharedWorkspace] absolutePathForAppBundleWithIdentifier:@"org.chromium.Chromium"];
-  if (!path)
-    path = @"/Applications/Chromium.app";
+  if (!path) {
+    FSRef folder;
+    OSErr err = FSFindFolder(kSystemDomain, kApplicationsFolderType, false, &folder);
+    if (err == noErr) {
+      CFURLRef url = CFURLCreateFromFSRef(kCFAllocatorDefault, &folder);
+      path = [(NSURL *)url path];
+      CFRelease(url);
+    }
+    return path ? [path stringByAppendingString:@"/Chromium.app"] : path;
+  }
   return path;
 }
 
