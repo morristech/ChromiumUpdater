@@ -179,6 +179,7 @@
   NSArray* arguments = [NSArray arrayWithObjects:@"-qq", [self temporaryFile], nil];
   [task setArguments:arguments];
   [task launch];
+  [task release];
 }
 
 - (void) notifyDownloadFailed:(NSError*)error {
