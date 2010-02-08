@@ -31,6 +31,8 @@
 }
 
 - (void) dealloc {
+  [localChromium release];
+  [remoteChromium release];
   [downloader release];
   [log release];
   [super dealloc];
@@ -102,10 +104,12 @@
   [progressStartup setHidden:NO];
   [progressStartup startAnimation:nil];
 
-  localChromium = [self detectLocalChromium];
+  [localChromium release];
+  localChromium = [[self detectLocalChromium] retain];
   [lblLocalVersion setStringValue:localChromium ? localChromium : @"Not installed!"];
 
-  remoteChromium = [self detectRemoteChromium];
+  [remoteChromium release];
+  remoteChromium = [[self detectRemoteChromium] retain];
   [lblRemoteVersion setStringValue:remoteChromium ? remoteChromium : @"Unable to detect!"];
 
   if (localChromium && remoteChromium) {
