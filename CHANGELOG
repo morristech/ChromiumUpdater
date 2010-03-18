@@ -1,3 +1,7 @@
+Version 1.0.2 (18.03.2010)
+--------------------------
+- Added automatic update and exit feature
+
 Version 1.0.1 (08.02.2010)
 --------------------------
 - Fixed crash when fetching changes after doing an update
