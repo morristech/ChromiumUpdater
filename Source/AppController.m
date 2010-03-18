@@ -18,6 +18,7 @@
 }
 
 - (void) awakeFromNib {
+  autoUpdateRunning = NO;
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(taskFinished:) name:NSTaskDidTerminateNotification object:nil];
   ChangeCell* cell = [[[ChangeCell alloc] init] autorelease];
   [[tblChanges tableColumnWithIdentifier:@"Changes"] setDataCell:cell];
@@ -129,6 +130,10 @@
         break;
     }
     [self fetchChanges:nil];
+    if (res == NSOrderedAscending && [[NSUserDefaults standardUserDefaults] boolForKey:@"autoMode"]) {
+      autoUpdateRunning = YES;
+      [self performSelectorOnMainThread:@selector(update:) withObject:nil waitUntilDone:NO];//afterDelay:1.0];
+    }
   } else {
     [btnFetchChanges setHidden:YES];
     if (!localChromium && remoteChromium) {
@@ -201,6 +206,8 @@
   [progressUpdate setHidden:YES];
   [lblInfo setStringValue:@"finished!"];
   [lblLocalVersion setStringValue:[self detectLocalChromium]];
+  if (autoUpdateRunning)
+    [NSApp performSelector:@selector(terminate:) withObject:nil afterDelay:1.5];
 }
 
 @end

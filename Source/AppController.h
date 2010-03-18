@@ -36,6 +36,7 @@
 
   ChangeLog* log;
   Downloader* downloader;
+  bool autoUpdateRunning;
 }
 
 @property (readonly) NSTextField* lblInfo;
