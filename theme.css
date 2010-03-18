@@ -5,7 +5,7 @@
 
 body {
   font-family: "Calibri", "Lucida Grande";
-	color: black;
+  color: black;
 }
 
 #header {
@@ -44,7 +44,7 @@ body {
 }
 
 
-h1 { font-size: 3.4em; color: #0061DF; margin-bottom: 3px; }
+h1 { font-size: 3.2em; color: #0061DF; margin-bottom: 3px; }
 h1 .small { font-size: 0.4em; color: #000000; }
 h1 a { text-decoration: none }
 h2 {
