@@ -43,7 +43,7 @@
     if (![revisions containsObject:number]) {
       NSString *xmlStr = [NSString stringWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%u/changelog.xml", CHROMIUM_URL, rev]] encoding:NSASCIIStringEncoding error:&error];
       NSXMLDocument* doc = [[NSXMLDocument alloc] initWithXMLString:xmlStr options:NSXMLDocumentTidyXML error:&error];
-      NSArray* logEntries = [[doc rootElement] elementsForName:@"logentry"];
+      NSArray* logEntries = [doc objectsForXQuery:@"//changelogs/log/logentry" error:&error];
       for (NSXMLElement* entry in logEntries) {
         Change* c = [Change changeFromEntry:entry width:[tableView bounds].size.width - 24];
         [changes addObject:c];
